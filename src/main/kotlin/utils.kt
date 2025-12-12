@@ -20,3 +20,10 @@ fun getDay(): String {
   val regex = "day\\d{2}".toRegex()
   return regex.find(stackTrace[2].className)!!.value
 }
+
+fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+  this[index1] = this[index2].also { this[index2] = this[index1] }
+}
+
+fun gcd(a: Long, b: Long): Long = if (b == 0L) a else gcd(b, a % b)
+fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
