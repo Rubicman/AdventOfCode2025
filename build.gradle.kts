@@ -1,5 +1,6 @@
 plugins {
   kotlin("jvm") version "2.2.20"
+  application
 }
 
 group = "ru.kubantsev"
@@ -18,4 +19,8 @@ tasks.test {
 }
 kotlin {
   jvmToolchain(21)
+}
+
+application {
+  mainClass.set("CLIRunnerKt")
 }

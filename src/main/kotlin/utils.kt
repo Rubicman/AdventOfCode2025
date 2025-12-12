@@ -11,6 +11,8 @@ fun solution(body: (List<String>) -> Unit) {
 
 fun Path.test(body: (List<String>) -> Unit) = try {
   readLines().apply(body)
+} catch (_: java.nio.file.NoSuchFileException) {
+  println("Input file not found: $this. Please add it")
 } catch (e: Exception) {
   println("Error: $e")
 }
