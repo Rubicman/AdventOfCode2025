@@ -66,7 +66,7 @@ private fun Machine.gaussianElimination(
   if (noSolution)
     throw IllegalStateException("No solution: $this")
 
-  // Clearing the maximum amount above the diagonal
+  // Clearing the maximum amount above the diagonal. This is optional and not needed
   for (i in n - 1 downTo 0) {
     var noZeroColumn = -1
     for (j in 0..<m) {
@@ -114,6 +114,7 @@ private fun Machine.allSolutions(
       }
     }
 
+    buttonsInSolutions.add(noZeroColumn)
     solutionSequence = solutionSequence.new { pushCounts ->
       var sum = matrix[i][m]
       for (j in noZeroColumn + 1..<m) {
@@ -130,7 +131,8 @@ private fun Machine.allSolutions(
   return solutionSequence
 }
 
-private fun <T> Sequence<T>.new(block: suspend SequenceScope<T>.(T) -> Unit): Sequence<T> = sequence { forEach { block(it) } }
+private fun <T> Sequence<T>.new(block: suspend SequenceScope<T>.(T) -> Unit): Sequence<T> =
+  sequence { forEach { block(it) } }
 
 private fun bruteforceButtons(index: Int, limit: Int, prev: Solutions): Solutions = sequence {
   prev.forEach { pushCounts ->
